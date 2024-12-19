@@ -6,7 +6,7 @@ export default function NavBar() {
     <div className="navbar">
       <div className="logo">
         <span className="icon">🍿</span>
-        <h1>usePopcorn</h1>
+        <h2>usePopcorn</h2>
       </div>
       <input
         className="searchBar"
