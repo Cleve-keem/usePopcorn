@@ -28,7 +28,9 @@
   width: 500px;
   padding: 0.6rem 1rem;
   border-radius: 5px;
-  border: 1px solid grey;
+  border: none;
+  outline: none;
+  /* border: 1px solid grey; */
   background-color: #9f33ff;
   color: #fff;
 }
