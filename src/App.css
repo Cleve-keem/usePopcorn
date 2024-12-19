@@ -38,3 +38,25 @@
 input::placeholder{
   color: lightgrey;
 }
+
+@media screen and (max-width: 390px){
+  .navbar{
+    justify-content: start;
+    gap: 10px;
+  }
+  .logo{
+    gap: 0;
+  }
+  .logo h2{
+    font-size: 16px;
+  }
+
+  .navbar input{
+    width: 150px;
+    padding: 0.4em 0.8rem;
+  }
+  p{
+    font-size: 12px;
+    white-space: nowrap;
+  }
+}
