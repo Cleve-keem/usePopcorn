@@ -64,6 +64,10 @@
   padding: 0.6rem 1rem;
   border-radius: 5px;
   border: 1px solid grey;
-  background-color: transparent;
-  /* flex: 1; */
+  background-color: #9f33ff;
+  color: #fff;
+}
+
+input::placeholder{
+  color: #444;
 }
