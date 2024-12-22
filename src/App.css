@@ -13,7 +13,6 @@
   display: flex;
   align-items: center;
   gap: 10px;
-
 }
 
 .logo h2 {
@@ -66,26 +65,61 @@ input::placeholder {
   display: flex;
   justify-content: space-between;
   gap: 1rem;
-  margin: 1rem;
+  margin: 0.7rem 1.5rem;
 }
 
 .box {
+  position: relative;
   flex: 1;
   min-height: calc(100vh - 98.19px);
   color: white;
-  background-color: #222;
-  padding: 1rem;
+  background-color: #111;
+  /* padding: 10px; */
   border-radius: 0.5rem;
+  overflow: hidden;
 }
 
-button{
+button {
+  position: absolute;
+  right: 12px;
+  top: 12px;
   text-align: center;
   background-color: #000;
   border: none;
-  color: #fff;
-  float: right;
+  color: #bbb;
   border-radius: 50%;
-  width: 30px;
-  height: 30px;
-  font-size: 16px;
+  width: 20px;
+  height: 20px;
+  font-size: 12px;
+}
+
+ul li {
+  padding: 1rem 1.5rem;
+  display: flex;
+  flex: 1;
+  gap: 15px;
+  align-items: center;
+  border-bottom: 1px solid #223;
+  border-radius: 1rem;
+}
+
+ul li:hover {
+  background-color: #222;
+  box-shadow: 0 1px 10px #000;
+}
+
+.poster{
+  width: 40px;
+}
+
+.desc {
+  font-size: 13px;
+}
+
+h4{
+  margin-bottom: 8px;
+}
+
+p span {
+  margin-right: 5px;
 }

@@ -41,10 +41,15 @@ ul {
   list-style: none;
 }
 
+img{
+  width: 100%;
+  object-fit: contain;
+  display: block;
+}
+
 button {
   background-color: #1a1a1a;
   cursor: pointer;
-  padding: 0.03em;
   transition: border-color 0.25s;
 }
 

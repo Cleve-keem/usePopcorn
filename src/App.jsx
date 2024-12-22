@@ -9,7 +9,7 @@ const tempMovieData = [
     Title: "inception",
     Year: "2010",
     Poster:
-      "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.amazon.com%2FPosters-USA-Inception-Poster-GLOSSY%2Fdp%2FB01MRP0KEW&psig=AOvVaw1Ftq_kteRsyn2u4KsSkupu&ust=1734605133751000&source=images&cd=vfe&opi=89978449&ved=0CBEQjRxqFwoTCLDwmu-RsYoDFQAAAAAdAAAAABAE",
+      "https://th.bing.com/th/id/OIP.ULu3ytbiO_JdNVHqx4mqiQHaLH?rs=1&pid=ImgDetMain",
   },
   {
     imdbID: "tt0133093",
