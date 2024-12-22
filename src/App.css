@@ -20,7 +20,7 @@
 }
 
 .navbar input {
-  width: 500px;
+  width: 300px;
   padding: 0.6rem 1rem;
   border-radius: 5px;
   border: none;
@@ -73,8 +73,7 @@ input::placeholder {
   flex: 1;
   min-height: calc(100vh - 98.19px);
   color: white;
-  background-color: #111;
-  /* padding: 10px; */
+  background-color: #222;
   border-radius: 0.5rem;
   overflow: hidden;
 }
@@ -99,16 +98,19 @@ ul li {
   flex: 1;
   gap: 15px;
   align-items: center;
-  border-bottom: 1px solid #223;
-  border-radius: 1rem;
+  border-bottom: 1px solid #333;
 }
+
+/* ul li:first-child, ul li:last-child {
+  border-radius: 1rem;
+} */
 
 ul li:hover {
-  background-color: #222;
-  box-shadow: 0 1px 10px #000;
+  background-color: #333;
+  box-shadow: 0 1px 10px #222;
 }
 
-.poster{
+.poster {
   width: 40px;
 }
 
@@ -116,10 +118,31 @@ ul li:hover {
   font-size: 13px;
 }
 
-h4{
+h4 {
   margin-bottom: 8px;
 }
 
 p span {
-  margin-right: 5px;
+  margin-right: 3px;
+}
+
+.summary {
+  padding: 1rem;
+  background-color: #333;
+  font-size: 12px;
+  border-radius: 1rem;
+}
+
+.summary h2 {
+  text-transform: uppercase;
+  font-size: 12px;
+}
+
+.summary div {
+  display: flex;
+  gap: 1rem;
+}
+
+.ratings {
+  display: flex;
 }
