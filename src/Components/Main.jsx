@@ -7,9 +7,13 @@ export default function Main({ tempWatchedData, tempMovieData, average }) {
   const [isOpen1, setIsOpen1] = useState(true);
   const [isOpen2, setIsOpen2] = useState(true);
 
-  const avgImdbRating = average(watched.map((movies) => movies.imdbRating));
-  const avgRuntime = average(watched.map((movies) => movies.runtime));
-  const avgUserRating = average(watched.map((movies) => movies.userRating));
+  const avgImdbRating = average(watched.map((movie) => movie.imdbRating));
+  const avgRuntime = average(watched.map((movie) => movie.runtime));
+  const avgUserRating = average(watched.map((movie) => movie.userRating));
+
+  console.log(avgImdbRating);
+  console.log(avgUserRating);
+  console.log(avgRuntime);
 
   function handleToggle1() {
     setIsOpen1((prevState) => !prevState);
@@ -25,37 +29,20 @@ export default function Main({ tempWatchedData, tempMovieData, average }) {
         <Button onClick={handleToggle1}>{isOpen1 ? "-" : "+"}</Button>
         {isOpen1 && (
           <ul className="rating">
-            <li className="movie">
-              <div className="poster">
-                <img
-                  src="https://th.bing.com/th/id/OIP.ULu3ytbiO_JdNVHqx4mqiQHaLH?rs=1&pid=ImgDetMain"
-                  alt="Movie Poster"
-                />
-              </div>
-              <div className="desc">
-                <h4 className="name">Title</h4>
-                <p>
-                  <span>📅</span>
-                  <span>2010</span>
-                </p>
-              </div>
-            </li>
-
-            <li className="movie">
-              <div className="poster">
-                <img
-                  src="https://th.bing.com/th/id/OIP.ULu3ytbiO_JdNVHqx4mqiQHaLH?rs=1&pid=ImgDetMain"
-                  alt="Movie Poster"
-                />
-              </div>
-              <div className="desc">
-                <h4 className="name">Title</h4>
-                <p>
-                  <span>📅</span>
-                  <span>2014</span>
-                </p>
-              </div>
-            </li>
+            {movies.map((movie) => (
+              <li className="movie" key={movie.imdbID}>
+                <div className="poster">
+                  <img src={movie.poster} alt="Movie Poster" />
+                </div>
+                <div className="desc">
+                  <h4 className="name">{movie.title}</h4>
+                  <p>
+                    <span>📅</span>
+                    <span>{movie.year}</span>
+                  </p>
+                </div>
+              </li>
+            ))}
           </ul>
         )}
       </div>
@@ -69,49 +56,51 @@ export default function Main({ tempWatchedData, tempMovieData, average }) {
               <div>
                 <p>
                   <span>#️⃣</span>
-                  <span>2 Movies</span>
+                  <span>{watched.length} Movies</span>
                 </p>
                 <p>
                   <span>⭐</span>
-                  <span>10</span>
+                  <span>{avgImdbRating}</span>
                 </p>
                 <p>
                   <span>🌟</span>
-                  <span>8</span>
+                  <span>{avgUserRating}</span>
                 </p>
                 <p>
                   <span>⏳</span>
-                  <span>132 min</span>
+                  <span>{avgRuntime} mins</span>
                 </p>
               </div>
             </div>
 
             <ul className="list">
-              <li>
-                <div className="poster">
-                  <img
-                    src="https://th.bing.com/th/id/OIP.ULu3ytbiO_JdNVHqx4mqiQHaLH?rs=1&pid=ImgDetMain"
-                    alt="Movie Poster"
-                  />
-                </div>
-                <div className="desc">
-                  <h4 className="name">Title</h4>
-                  <div className="ratings">
-                    <p>
-                      <span>⭐</span>
-                      <span>imdb rating</span>
-                    </p>
-                    <p>
-                      <span>⭐</span>
-                      <span>user rating</span>
-                    </p>
-                    <p>
-                      <span>⏳</span>
-                      <span>runtime</span>
-                    </p>
+              {watched.map((movie) => (
+                <li>
+                  <div className="poster">
+                    <img
+                      src={movie.poster}
+                      alt="Movie Poster"
+                    />
                   </div>
-                </div>
-              </li>
+                  <div className="desc">
+                    <h4 className="name">{movie.title}</h4>
+                    <div className="ratings">
+                      <p>
+                        <span>⭐</span>
+                        <span>{movie.imdbRating}</span>
+                      </p>
+                      <p>
+                        <span>⭐</span>
+                        <span>{movie.userRating}</span>
+                      </p>
+                      <p>
+                        <span>⏳</span>
+                        <span>{movie.runtime} mins</span>
+                      </p>
+                    </div>
+                  </div>
+                </li>
+              ))}
             </ul>
           </>
         )}

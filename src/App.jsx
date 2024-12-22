@@ -50,9 +50,9 @@ const tempWatchedData = [
   },
 ];
 
-const average = (arr) => {
-  arr.reduce((acc, curr, i, arr) => acc + curr / arr.length, 0);
-};
+function average(arr) {
+  return arr.reduce((acc, cur) => acc + cur / arr.length, 0);
+}
 
 function App() {
   return (
