@@ -1,7 +1,12 @@
-// import { useState } from "react";
+import { useState } from "react";
 import "./App.css";
 import NavBar from "./Components/Navbar";
 import Main from "./Components/Main";
+import Logo from "./Components/Navbar/Logo";
+import Search from "./Components/Navbar/Search";
+import MovieLength from "./Components/Navbar/MovieLength";
+import ListBox from "./Components/ListBox";
+import WatchedBox from "./Components/WatchedBox";
 
 const tempMovieData = [
   {
@@ -33,7 +38,7 @@ const tempWatchedData = [
     title: "inception",
     year: "2010",
     poster:
-      "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.amazon.com%2FPosters-USA-Inception-Poster-GLOSSY%2Fdp%2FB01MRP0KEW&psig=AOvVaw1Ftq_kteRsyn2u4KsSkupu&ust=1734605133751000&source=images&cd=vfe&opi=89978449&ved=0CBEQjRxqFwoTCLDwmu-RsYoDFQAAAAAdAAAAABAE",
+      "https://th.bing.com/th/id/OIP.ULu3ytbiO_JdNVHqx4mqiQHaLH?rs=1&pid=ImgDetMain",
     runtime: 148,
     imdbRating: 8.8,
     userRating: 10,
@@ -41,9 +46,9 @@ const tempWatchedData = [
   {
     imdbID: "tt0088763",
     title: "Back To The Future",
-    year: "!985",
+    year: "1985",
     poster:
-      "https://www.google.com/url?sa=i&url=https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FBack_to_the_Future&psig=AOvVaw2Ou2vT15dDMRQWyvQqpTcL&ust=1734605816159000&source=images&cd=vfe&opi=89978449&ved=0CBAQjRxqFwoTCKjnuK-UsYoDFQAAAAAdAAAAABAE",
+      "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQiAUI52_-niASQabl_PqdkJQ-moVziM6ahfiYkZW9NSnhcciNw",
     runtime: 116,
     imdbRating: 8.5,
     userRating: 9,
@@ -55,14 +60,20 @@ function average(arr) {
 }
 
 function App() {
+  const [movies, setMovies] = useState(tempMovieData);
+
   return (
     <div className="app">
-      <NavBar />
-      <Main
-        tempMovieData={tempMovieData}
-        tempWatchedData={tempWatchedData}
-        average={average}
-      />
+      <NavBar>
+        <Logo />
+        <Search />
+        <MovieLength movies={movies} />
+      </NavBar>
+
+      <Main>
+        <ListBox movies={movies} />
+        <WatchedBox tempWatchedData={tempWatchedData} average={average} />
+      </Main>
     </div>
   );
 }

@@ -1,8 +1,7 @@
 import { useState } from "react";
 import Button from "./Button";
 
-export default function ListBox({ tempMovieData }) {
-  const [movies, setMovies] = useState(tempMovieData);
+export default function ListBox({ movies }) {
   const [isOpen1, setIsOpen1] = useState(true);
 
   function handleToggle1() {
