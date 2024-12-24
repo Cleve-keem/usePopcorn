@@ -5,8 +5,11 @@ import Main from "./Components/Main";
 import Logo from "./Components/Navbar/Logo";
 import Search from "./Components/Navbar/Search";
 import MovieLength from "./Components/Navbar/MovieLength";
-import ListBox from "./Components/ListBox";
+import ListBox from "./Components/Box";
 import WatchedBox from "./Components/WatchedBox";
+import MovieList from "./Components/MovieList";
+import WatchedSummary from "./Components/WatchedSumarry";
+import WatchedMovieList from "./Components/WatchedMovieList";
 
 const tempMovieData = [
   {
@@ -71,8 +74,13 @@ function App() {
       </NavBar>
 
       <Main>
-        <ListBox movies={movies} />
-        <WatchedBox tempWatchedData={tempWatchedData} average={average} />
+        <Box>
+          <MovieList movies={movies} />
+        </Box>
+        <WatchedBox>
+          <WatchedSummary watched={tempWatchedData} average={average} />
+          <WatchedMovieList watched={tempWatchedData} />
+        </WatchedBox>
       </Main>
     </div>
   );

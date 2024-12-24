@@ -1,4 +1,4 @@
-export default function WatchedSummary({ watched, average}) {
+export default function WatchedSummary({ watched, average }) {
   const avgImdbRating = average(watched.map((movie) => movie.imdbRating));
   const avgRuntime = average(watched.map((movie) => movie.runtime));
   const avgUserRating = average(watched.map((movie) => movie.userRating));

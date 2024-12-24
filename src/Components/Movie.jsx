@@ -1,4 +1,4 @@
-export default function Movie({movie}) {
+export default function Movie({ movie }) {
   return (
     <li className="movie">
       <div className="poster">
