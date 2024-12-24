@@ -4,9 +4,9 @@ import NavBar from "./Components/Navbar";
 import Main from "./Components/Main";
 import Logo from "./Components/Navbar/Logo";
 import Search from "./Components/Navbar/Search";
+// import WatchedBox from "./Components/WatchedBox";
 import MovieLength from "./Components/Navbar/MovieLength";
-import ListBox from "./Components/Box";
-import WatchedBox from "./Components/WatchedBox";
+import Box from "./Components/Box";
 import MovieList from "./Components/MovieList";
 import WatchedSummary from "./Components/WatchedSumarry";
 import WatchedMovieList from "./Components/WatchedMovieList";
@@ -64,6 +64,7 @@ function average(arr) {
 
 function App() {
   const [movies, setMovies] = useState(tempMovieData);
+  const [watched, setWatched] = useState(tempWatchedData);
 
   return (
     <div className="app">
@@ -74,13 +75,25 @@ function App() {
       </NavBar>
 
       <Main>
-        <Box>
+        {/* explicit props */}
+        <Box element={<MovieList movies={movies} />} />
+        <Box
+          element={
+            <>
+              <WatchedSummary watched={watched} average={average} />
+              <WatchedMovieList watched={watched} />
+            </>
+          }
+        />
+
+        {/* <Box>
           <MovieList movies={movies} />
         </Box>
-        <WatchedBox>
-          <WatchedSummary watched={tempWatchedData} average={average} />
-          <WatchedMovieList watched={tempWatchedData} />
-        </WatchedBox>
+
+        <Box>
+          <WatchedSummary watched={watched} average={average} />
+          <WatchedMovieList watched={watched} />
+        </Box> */}
       </Main>
     </div>
   );

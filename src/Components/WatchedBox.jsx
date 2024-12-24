@@ -2,7 +2,6 @@
 // import Button from "./Button";
 
 // export default function WatchedBox({ children }) {      // tempWatchedData, average
-// //   const [watched, setWatched] = useState(tempWatchedData);
 //   const [isOpen2, setIsOpen2] = useState(true);
 
 //   function handleToggle2() {
