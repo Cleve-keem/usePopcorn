@@ -58,6 +58,11 @@ import WatchedMovieList from "./Components/WatchedMovieList";
 //   },
 // ];
 
+const loadingStyle = {
+  textAlign: "center",
+  marginTop: "20px"
+}
+
 function average(arr) {
   return arr.reduce((acc, cur) => acc + cur / arr.length, 0);
 }
@@ -92,7 +97,7 @@ function App() {
   }, []);
 
   function Loading() {
-    return <div className="loading" style={{textAlign: "center"}}>Loading...</div>;
+    return <div className="loading" style={loadingStyle}>Loading...</div>;
   }
 
   return (
