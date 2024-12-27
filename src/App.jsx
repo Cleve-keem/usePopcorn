@@ -10,8 +10,7 @@ import Box from "./Components/Box";
 import MovieList from "./Components/MovieList";
 import WatchedSummary from "./Components/WatchedSumarry";
 import WatchedMovieList from "./Components/WatchedMovieList";
-import SelectedMovie from "./Components/SelectedMovie";
-
+import MovieDetails from "./Components/MovieDetails";
 
 const loadingStyle = {
   textAlign: "center",
@@ -72,7 +71,7 @@ function App() {
 
   function Error({ errorMessage }) {
     return (
-      <div className="error">
+      <div className="error" style={{textAlign: "center", marginTop: "2rem"}}>
         <span>⛔</span>
         {errorMessage}
       </div>
@@ -89,6 +88,10 @@ function App() {
 
   function selectedMovie(id) {
     setSelectedID((prev) => (id === prev ? null : id));
+  }
+
+  function handleCloseMovie() {
+    setSelectedID(null);
   }
 
   return (
@@ -114,14 +117,14 @@ function App() {
         <Box>
           {isLoading && <Loading />}
           {!isLoading && !error && (
-            <MovieList movies={movies} onSelected={selectedMovie} />
+            <MovieList movies={movies} onSelectedMovie={selectedMovie} />
           )}
           {error && <Error errorMessage={error} />}
         </Box>
 
         <Box>
           {selectedID ? (
-            <SelectedMovie selectedID={selectedID}/>
+            <MovieDetails selectedID={selectedID} onClose={handleCloseMovie}/>
           ) : (
             <>
               <WatchedSummary watched={watched} average={average} />
