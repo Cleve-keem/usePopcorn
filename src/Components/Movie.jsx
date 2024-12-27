@@ -1,6 +1,6 @@
-export default function Movie({ movie }) {
+export default function Movie({ movie, onSelected }) {
   return (
-    <li className="movie">
+    <li className="movie" onClick={()=>{onSelected(movie.imdbID)}}>
       <div className="poster">
         <img src={movie.Poster} alt="Movie Poster" />
       </div>

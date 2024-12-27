@@ -10,53 +10,8 @@ import Box from "./Components/Box";
 import MovieList from "./Components/MovieList";
 import WatchedSummary from "./Components/WatchedSumarry";
 import WatchedMovieList from "./Components/WatchedMovieList";
+import SelectedMovie from "./Components/SelectedMovie";
 
-// const tempMovieData = [
-//   {
-//     imdbID: "tt1375666",
-//     title: "inception",
-//     year: "2010",
-//     poster:
-//       "https://th.bing.com/th/id/OIP.ULu3ytbiO_JdNVHqx4mqiQHaLH?rs=1&pid=ImgDetMain",
-//   },
-//   {
-//     imdbID: "tt0133093",
-//     title: "The Matix",
-//     year: "1999",
-//     poster:
-//       "https://www.google.com/url?sa=i&url=https%3A%2F%2Fencrypted-tbn0.gstatic.com%2Fimages%3Fq%3Dtbn%3AANd9GcR5DoFtShSmClflZ0RzBj9JBMweU5IUVBCeEbbLeV2XPlCnTKNi&psig=AOvVaw0yJsotMJs3u2tlmswuOIap&ust=1734605253632000&source=images&cd=vfe&opi=89978449&ved=0CBAQjRxqFwoTCOCw7aySsYoDFQAAAAAdAAAAABAE",
-//   },
-//   {
-//     imdbID: "tt6751668",
-//     title: "Parasite",
-//     year: "2019",
-//     poster:
-//       "https://www.google.com/url?sa=i&url=https%3A%2F%2Fencrypted-tbn0.gstatic.com%2Fimages%3Fq%3Dtbn%3AANd9GcQBeM99UrE8KJqgLw2TnRYKPsE-b2s1vv_FNiYt6CJDC6ZlnqLv&psig=AOvVaw0hGBdycT1z7UTRXQHb-Sig&ust=1734605394273000&source=images&cd=vfe&opi=89978449&ved=0CBAQjRxqFwoTCNDImuaSsYoDFQAAAAAdAAAAABAE",
-//   },
-// ];
-
-// const tempWatchedData = [
-//   {
-//     imdbID: "tt1375666",
-//     title: "inception",
-//     year: "2010",
-//     poster:
-//       "https://th.bing.com/th/id/OIP.ULu3ytbiO_JdNVHqx4mqiQHaLH?rs=1&pid=ImgDetMain",
-//     runtime: 148,
-//     imdbRating: 8.8,
-//     userRating: 10,
-//   },
-//   {
-//     imdbID: "tt0088763",
-//     title: "Back To The Future",
-//     year: "1985",
-//     poster:
-//       "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQiAUI52_-niASQabl_PqdkJQ-moVziM6ahfiYkZW9NSnhcciNw",
-//     runtime: 116,
-//     imdbRating: 8.5,
-//     userRating: 9,
-//   },
-// ];
 
 const loadingStyle = {
   textAlign: "center",
@@ -74,14 +29,15 @@ function App() {
   const [watched, setWatched] = useState([]);
   const [search, setSearch] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(null);
-  // const query = "interstellar";
+  const [error, setError] = useState("");
+  const [selectedID, setSelectedID] = useState(null);
 
   useEffect(
     function () {
       async function fetchMovies() {
         try {
           setIsLoading(true);
+          setError("");
           const res = await fetch(
             `http://www.omdbapi.com/?apikey=${KEY}&s=${search}`
           );
@@ -90,12 +46,15 @@ function App() {
             throw new Error("Something went wrong when fetching movies!");
 
           const data = await res.json();
-          if (!data.Response === "False") throw new Error("Movie not found");
+
+          if (data.Response === "False")
+            throw new Error(data.Error || "Movie not found");
+
           setMovies(data.Search);
-          // console.log(data.Search);
-        } catch (error) {
-          console.log(error.message);
-          setError(error.message);
+          console.log(data.Search);
+        } catch (err) {
+          // console.log("error", err.message);
+          setError(err.message);
         } finally {
           setIsLoading(false);
         }
@@ -105,7 +64,6 @@ function App() {
           setError("");
           return;
         }
-        // console.log(error)
       }
       fetchMovies();
     },
@@ -127,6 +85,10 @@ function App() {
         Loading...
       </div>
     );
+  }
+
+  function selectedMovie(id) {
+    setSelectedID((prev) => (id === prev ? null : id));
   }
 
   return (
@@ -151,13 +113,21 @@ function App() {
 
         <Box>
           {isLoading && <Loading />}
-          {!isLoading && !error && <MovieList movies={movies} />}
+          {!isLoading && !error && (
+            <MovieList movies={movies} onSelected={selectedMovie} />
+          )}
           {error && <Error errorMessage={error} />}
         </Box>
 
         <Box>
-          <WatchedSummary watched={watched} average={average} />
-          <WatchedMovieList watched={watched} />
+          {selectedID ? (
+            <SelectedMovie selectedID={selectedID}/>
+          ) : (
+            <>
+              <WatchedSummary watched={watched} average={average} />
+              <WatchedMovieList watched={watched} />
+            </>
+          )}
         </Box>
       </Main>
     </div>
