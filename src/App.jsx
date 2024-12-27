@@ -60,8 +60,8 @@ import WatchedMovieList from "./Components/WatchedMovieList";
 
 const loadingStyle = {
   textAlign: "center",
-  marginTop: "20px"
-}
+  marginTop: "20px",
+};
 
 function average(arr) {
   return arr.reduce((acc, cur) => acc + cur / arr.length, 0);
@@ -72,39 +72,68 @@ const KEY = "7023817c";
 function App() {
   const [movies, setMovies] = useState([]);
   const [watched, setWatched] = useState([]);
+  const [search, setSearch] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const query = "interstellar";
+  const [error, setError] = useState(null);
+  // const query = "interstellar";
 
-  useEffect(function () {
-    async function fetchMovies() {
-      try {
-        setIsLoading(true);
-        const res = await fetch(
-          `http://www.omdbapi.com/?apikey=${KEY}&s=${query}`
-        );
+  useEffect(
+    function () {
+      async function fetchMovies() {
+        try {
+          setIsLoading(true);
+          const res = await fetch(
+            `http://www.omdbapi.com/?apikey=${KEY}&s=${search}`
+          );
 
-        const data = await res.json();
-        setMovies(data.Search);
-        console.log(data.Search);
-      } catch (error) {
-        console.log(error.message)
+          if (!res.ok)
+            throw new Error("Something went wrong when fetching movies!");
+
+          const data = await res.json();
+          if (!data.Response === "False") throw new Error("Movie not found");
+          setMovies(data.Search);
+          // console.log(data.Search);
+        } catch (error) {
+          console.log(error.message);
+          setError(error.message);
+        } finally {
+          setIsLoading(false);
+        }
+
+        if (search.length < 3) {
+          setMovies([]);
+          setError("");
+          return;
+        }
+        // console.log(error)
       }
-      finally{
-        setIsLoading(false);
-      }
-    }
-    fetchMovies();
-  }, []);
+      fetchMovies();
+    },
+    [search]
+  );
+
+  function Error({ errorMessage }) {
+    return (
+      <div className="error">
+        <span>⛔</span>
+        {errorMessage}
+      </div>
+    );
+  }
 
   function Loading() {
-    return <div className="loading" style={loadingStyle}>Loading...</div>;
+    return (
+      <div className="loading" style={loadingStyle}>
+        Loading...
+      </div>
+    );
   }
 
   return (
     <div className="app">
       <NavBar>
         <Logo />
-        <Search />
+        <Search search={search} setSearch={setSearch} />
         <MovieLength movies={movies} />
       </NavBar>
 
@@ -120,7 +149,11 @@ function App() {
           }
         /> */}
 
-        <Box>{isLoading ? <Loading /> : <MovieList movies={movies} />}</Box>
+        <Box>
+          {isLoading && <Loading />}
+          {!isLoading && !error && <MovieList movies={movies} />}
+          {error && <Error errorMessage={error} />}
+        </Box>
 
         <Box>
           <WatchedSummary watched={watched} average={average} />

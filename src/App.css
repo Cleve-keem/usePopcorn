@@ -72,10 +72,10 @@ input::placeholder {
   position: relative;
   flex: 1;
   max-height: calc(100vh - 98.19px);
+  min-height: calc(100vh - 98.19px);
   color: white;
   background-color: #222;
   border-radius: 0.5rem;
-  /* overflow: hidden; */
   overflow-y: scroll;
   scrollbar-width: none;
 }
