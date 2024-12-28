@@ -152,3 +152,45 @@ p span {
 .ratings {
   display: flex;
 }
+
+.btn-close {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  background-color: white;
+  font-size: larger;
+  color: #000;
+  top: 7px;
+  left: 10px;
+}
+
+header {
+  display: flex;
+  background-color: #333;
+  /* align-self: center; */
+}
+
+.details-poster {
+  width: 150px;
+  /* max-height: 200px; */
+  /* object-fit: cover; */
+}
+
+.details-overview {
+  padding: 15px 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+section{
+  padding: 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.star:hover .hover{
+  fill: orange;
+  /* stroke: orange; */
+}

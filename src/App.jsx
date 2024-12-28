@@ -21,7 +21,7 @@ function average(arr) {
   return arr.reduce((acc, cur) => acc + cur / arr.length, 0);
 }
 
-const KEY = "7023817c";
+export const KEY = "7023817c";
 
 function App() {
   const [movies, setMovies] = useState([]);
@@ -87,7 +87,7 @@ function App() {
   }
 
   function selectedMovie(id) {
-    setSelectedID((prev) => (id === prev ? null : id));
+    setSelectedID((prevId) => (id === prevId ? null : id));
   }
 
   function handleCloseMovie() {
@@ -124,7 +124,7 @@ function App() {
 
         <Box>
           {selectedID ? (
-            <MovieDetails selectedID={selectedID} onClose={handleCloseMovie}/>
+            <MovieDetails selectedID={selectedID} onClose={handleCloseMovie} Apikey={KEY} />
           ) : (
             <>
               <WatchedSummary watched={watched} average={average} />

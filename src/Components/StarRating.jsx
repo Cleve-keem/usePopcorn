@@ -4,7 +4,14 @@ import Star from "./Star";
 const containerStyle = {
   display: "flex",
   alignItem: "center",
+  justifyContent: "center",
   gap: "10px",
+  backgroundColor: "#333",
+  padding: "1rem",
+  borderRadius: "10px",
+  // width: "max-content",
+  margin: "auto",
+  color: "orange",
 };
 
 const starContainerStyle = {
